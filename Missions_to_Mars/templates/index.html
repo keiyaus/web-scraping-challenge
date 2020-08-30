@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Latest Mars Data</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- Own CSS stylesheet -->
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+    <!-- News section -->
+    <section class="row">
+      <div class="col-md-12">
+        <h3>Latest Mars News</h3>
+        <h4>{{ data.news_title }}</h4>
+        <p>{{ data.news_p }}</p>
+      </div>
+    </section>
+
+    <!-- Image & facts section -->
+    <section class="row" id="midSection">
+      <div class="col-md-8">
+        <h3>Featured Mars Image</h3>
+        <img src="{{ data.featured_image }}" alt="Featured image" width="100%">
+      </div>
+      <div class="col-md-4">
+        <div class="table-responsive">
+          <h3>Mars Facts</h3>
+          </br>
+          {{ data.table_html|safe }}
+        </div>
+      </div>
+    </section>
+
+    <!-- Hemisphere section -->
+    <section class="row">
+      <div class="col-md-12">
+        <h3 style="text-align:center;">Mars Hemispheres</h3>
+        <hr />
+        <div class="row">
+          {% for h in data.hemisphere %}
+          <div class="col-3 col-md-6">
+            <img src="{{h['img_url']}}" alt="{{h['title']}}" class="img-fluid" id="hem-img"/>
+            <h5 id="caption">{{h['title']}}</h5>
+            <br/>
+          </div>
+          {% endfor %}
+        </div>
+    </section>
+  </div>
+</body>
+
+</html>
